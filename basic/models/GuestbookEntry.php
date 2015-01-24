@@ -26,6 +26,7 @@ class GuestbookEntry extends ActiveRecord
         return [
             [["email", "name", "message", "verification"], "required"],
             ["email", "email"],
+            ["verification", "captcha"]
         ];
     }
 }
