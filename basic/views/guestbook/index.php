@@ -15,5 +15,5 @@
 </ul>
 
 <?= LinkPager::widget(["pagination" => $pagination]); ?>
-
-<a href="<?= Url::to(["guestbook/form"]); ?>">Create a post</a>
+<br>
+<a href="<?= Url::to(["guestbook/form"]); ?>" class="btn btn-primary">Create a post</a>
