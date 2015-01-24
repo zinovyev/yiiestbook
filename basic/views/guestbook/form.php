@@ -2,16 +2,9 @@
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     use yii\captcha\Captcha;
-    use yii\helpers\Url
+    use yii\helpers\Url;
 ?>
-<div class="row">
-    <div class="col-md-12">
 
-        <div class="page-header">
-            <h1>Yiiestbook <small>A simple guestbook powerd by Yii</small></h1>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-md-12">
         <?php $form = ActiveForm::begin(); ?>
