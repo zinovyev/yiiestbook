@@ -11,7 +11,7 @@
     <?= $form->field($guestbook, "message")->textarea(); ?>
     <?= $form->field($guestbook, "verification", [
         "labelOptions" => ["label" => "Captcha"],
-    ])->widget(Captcha::className()); ?>
+    ])->widget(Captcha::className(), ['captchaAction' => 'guestbook/captcha']); ?>
 
     <div class="form-group">
         <?= Html::submitButton("Submit", ["class" => "btn btn-primary"]); ?>    

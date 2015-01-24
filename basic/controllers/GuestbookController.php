@@ -4,6 +4,8 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\data\Pagination;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use app\models\GuestbookEntry;
 
 /**
@@ -13,6 +15,34 @@ use app\models\GuestbookEntry;
  */
 class GuestbookController extends Controller
 {
+    /**
+     * Filters
+     * 
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @return array
      */
@@ -43,7 +73,7 @@ class GuestbookController extends Controller
             "totalCount"        => $query->count(),
         ]);
 
-        $entries = $query->orderBy("id")
+        $entries = $query->orderBy("id desc")
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all()
