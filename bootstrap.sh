@@ -27,6 +27,7 @@ apt-get install -y mysql-server mysql-client
 # Install php-fpm
 apt-get install -y php5-cli php5-common php5-mysql php5-gd php5-fpm php5-cgi php5-fpm php-pear php5-mcrypt
 apt-get -f install
+php5enmod mcrypt
 
 # Stop servers
 service nginx stop
