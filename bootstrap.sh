@@ -74,14 +74,21 @@ fi
 cat << 'EOF' > /etc/nginx/sites-available/vagrant
 server
 {
+    charset utf-8;
+    client_max_body_size 128M;
     listen  80;
-    root /vagrant;
-    index index.php index.html index.htm;
-#    server_name localhost
+
+    root /vagrant/basic/web;
+    index index.php;
+
+    #access_log  /vagrant/basic/log/access.log main;
+    #error_log   /vagrant/basic/log/error.log;
+
     location "/"
     {
-        index index.php index.html index.htm;
-        try_files $uri $uri/ =404;
+        # Redirect everything that isn't a real file to index.php
+        try_files $uri $uri/ /vagrant/basic/web/index.php?$args
+        index index.php;
     }
 
     location ~ \.php$
@@ -89,7 +96,12 @@ server
         include /etc/nginx/fastcgi_params;
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME /vagrant$fastcgi_script_name;
+        try_files $uri =404;
+    }
+
+    location ~ /\.(ht|svn|git)
+    {
+        deny all;
     }
 }
 EOF
