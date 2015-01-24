@@ -12,12 +12,19 @@ use yii\db\ActiveRecord;
 class GuestbookEntry extends ActiveRecord
 {
     /**
+     * Captcha vefication
+     * 
+     * @var string
+     */
+    public $verification;
+
+    /**
      * @return array
      */
     public function rules()
     {
         return [
-            [["email", "name", "message"], "required"],
+            [["email", "name", "message", "verification"], "required"],
             ["email", "email"],
         ];
     }

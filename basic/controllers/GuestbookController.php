@@ -23,7 +23,7 @@ class GuestbookController extends Controller
         $query = GuestbookEntry::find();
 
         $pagination = new Pagination([
-            "defaultPageSize"   => 5,
+            "defaultPageSize"   => 3,
             "totalCount"        => $query->count(),
         ]);
 
