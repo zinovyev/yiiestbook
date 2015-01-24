@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use app\models\GuestbookEntry;
 
 /**
@@ -44,6 +45,8 @@ class GuestbookController extends Controller
     }
 
     /**
+     * Build actions
+     * 
      * @return array
      */
     public function actions()
@@ -99,6 +102,8 @@ class GuestbookController extends Controller
 
         if ($guestbook->load(Yii::$app->request->post()) && $guestbook->validate()) {
             $guestbook->save(false);
+            $headers = Yii::$app->response->headers;
+            $headers->set("Refresh", "5;url=" . Url::to(["guestbook/index"]));
 
             return $this->render("confirm", ["guestbook" => $guestbook]);
         } else {
