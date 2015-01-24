@@ -1,6 +1,7 @@
 <?php
     use yii\helpers\Html;
     use yii\widgets\LinkPager;
+    use yii\helpers\Url;
 ?>
 <h1>Guestbook entries:</h1>
 
@@ -14,3 +15,5 @@
 </ul>
 
 <?= LinkPager::widget(["pagination" => $pagination]); ?>
+
+<a href="<?= Url::to(["guestbook/form"]); ?>">Create a post</a>
