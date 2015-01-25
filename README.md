@@ -9,7 +9,7 @@ yiiestbook
 
 ## Installation
 
-If you haven`t *ubuntu/trusty64* box on your computer, install it with:
+If you haven`t *ubuntu/trusty64* box on your computer, install it using:
 
 ```sh
 $ vagrant box add ubuntu/trusty64
@@ -24,13 +24,12 @@ Run following code in your project directory:
 ~/prj/yiiestbook$ vagrant ssh
 ```
 
-Now when the ssh session is started, run the following code on the virtual machine:
+Now, when the ssh session is started, run the following code on the virtual machine:
 
 ```sh
 $ cd /vagrant/basic
-/vagrant/basic$ curl -sS https://getcomposer.org/installer | php
-/vagrant/basic$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
-/vagrant/basic$ php composer.phar install
+/vagrant/basic$ composer global require "fxp/composer-asset-plugin:1.0.0-beta4"
+/vagrant/basic$ composer install
 ```
 After all you need to create a new database. Login to mysql server using following command:
 ```sh

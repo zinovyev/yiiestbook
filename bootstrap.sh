@@ -24,16 +24,22 @@ debconf-set-selections <<< "mysql-server mysql-server/root_password password 123
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password 1234"
 apt-get install -y mysql-server mysql-client
 
-# Install php-fpm
+# Install php-fpm & deps
 apt-get install -y php5-cli php5-common php5-mysql php5-gd php5-fpm php5-cgi php5-fpm php-pear php5-mcrypt
 apt-get -f install
 php5enmod mcrypt
+
+# Install composer
+if [ ! -f /usr/local/bin/composer ]; then
+    curl -sS https://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
+fi
 
 # Stop servers
 service nginx stop
 service php5-fpm stop
 
-# php.ini
+# Configure php.ini
 if [ ! -f /etc/php5/fpm/php.ini.bkp ]; then
     cp /etc/php5/fpm/php.ini /etc/php5/fpm/php.ini.bkp
 else
@@ -42,7 +48,7 @@ else
 fi
 sed -i.bak 's/^;cgi.fix_pathinfo.*$/cgi.fix_pathinfo = 0/g' /etc/php5/fpm/php.ini
 
-# www.conf
+# Configure www.conf
 if [ ! -f /etc/php5/fpm/pool.d/www.conf.bkp ]; then
     cp /etc/php5/fpm/pool.d/www.conf /etc/php5/fpm/pool.d/www.conf.bkp
 else
@@ -57,7 +63,7 @@ sed -i.bak 's/^;listen.mode.*$/listen.mode = 0660/g' /etc/php5/fpm/pool.d/www.co
 
 service php5-fpm restart
 
-# Nginx
+# Configure nginx
 if [ ! -f /etc/nginx/sites-available/vagrant ]; then
     touch /etc/nginx/sites-available/vagrant
 fi
@@ -70,7 +76,7 @@ if [ ! -f /etc/nginx/sites-enabled/vagrant ]; then
     ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/vagrant
 fi
 
-# Configure host
+# Configure nginx host
 cat << 'EOF' > /etc/nginx/sites-available/vagrant
 server
 {
