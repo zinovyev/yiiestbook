@@ -82,9 +82,15 @@ class GuestbookController extends Controller
             ->all()
         ;
 
+        $title = $pagination->getPage()
+            ? sprintf('#%d', $pagination->getPage() + 1)
+            : ''
+        ;
+
         return $this->render(
             'index',
             [
+                'title'         => $title,
                 'entries'       => $entries,
                 'pagination'    => $pagination,
             ]
@@ -109,7 +115,7 @@ class GuestbookController extends Controller
             return $this->render(
                 'confirm',
                 [
-                    'title'     => 'Post successfully added!',
+                    'title'     => 'New post successfully added!',
                     'guestbook' => $guestbook,
                 ]
             );
@@ -118,7 +124,7 @@ class GuestbookController extends Controller
             return $this->render(
                 'form',
                 [
-                    'title'     => 'Create a new post',
+                    'title'     => 'New post',
                     'guestbook' => $guestbook,
                 ]
             ); 
