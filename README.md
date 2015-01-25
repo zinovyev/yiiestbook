@@ -12,10 +12,25 @@ yiiestbook
 $ vagrant box add ubuntu/trusty64
 $ vagrant up
 $ vagrant ssh
-$ cd /vendor/basic
+$ cd /vagrant/basic
 $ curl -sS https://getcomposer.org/installer | php
+$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
 $ php composer.phar install
+```
+After all you need to create a new database. Login to mysql server using following command:
+```sh
+$ mysql -uroot -p1234
+```
+
+And create a database:
+```sql
+create database yii2basic;
+exit;
+```
+
+Now you are ready to migrate data:
+```sh
 $ php yii migrate
 ```
 
-After installation the site will be available at *http://127.0.0.1:8080*. This port can be easyli changed in Vagrantfile (in the root folder of the project).
+When installation is complete, the site will be available at *http://127.0.0.1:8080*. This port can be easyli changed in Vagrantfile (in the root folder of the project).
