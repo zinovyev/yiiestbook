@@ -11,6 +11,11 @@ yiiestbook
 ```sh
 $ vagrant box add ubuntu/trusty64
 $ vagrant up
+$ vagrant ssh
+$ cd /vendor/basic
+$ curl -sS https://getcomposer.org/installer | php
+$ php composer.phar install
+$ php yii migrate
 ```
 
 After installation the site will be available at *http://127.0.0.1:8080*. This port can be easyli changed in Vagrantfile (in the root folder of the project).
