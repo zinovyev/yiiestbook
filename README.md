@@ -12,9 +12,16 @@ yiiestbook
 Run following code in your project directory:
 
 ```sh
-$ vagrant box add ubuntu/trusty64
-$ vagrant up
-$ vagrant ssh
+~/prj$ git clone https://github.com/zinovyev/yiiestbook.git
+~/prj$ cd yiiestbook
+~/prj/yiiestbook$ vagrant box add ubuntu/trusty64
+~/prj/yiiestbook$ vagrant up
+~/prj/yiiestbook$ vagrant ssh
+```
+
+Now run the following code on the virtual machine:
+
+```sh
 $ cd /vagrant/basic
 /vagrant/basic$ curl -sS https://getcomposer.org/installer | php
 /vagrant/basic$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
