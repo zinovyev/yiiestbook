@@ -3,6 +3,9 @@
     use yii\widgets\ActiveForm;
     use yii\captcha\Captcha;
     use yii\helpers\Url;
+    
+    // Create page title
+    $this->title = isset($title) ? (string) $title : '';
 ?>
 
 <div class="row">

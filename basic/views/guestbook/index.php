@@ -2,7 +2,11 @@
     use yii\helpers\Html;
     use yii\widgets\LinkPager;
     use yii\helpers\Url;
+
+    // Create page title
+    $this->title = isset($title) ? (string) $title : '';
 ?>
+
 <div class="row">
     <div class="col-md-12">
         <div>

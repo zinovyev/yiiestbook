@@ -72,21 +72,21 @@ class GuestbookController extends Controller
         $query = GuestbookEntry::find();
 
         $pagination = new Pagination([
-            "defaultPageSize"   => 10,
-            "totalCount"        => $query->count(),
+            'defaultPageSize'   => 10,
+            'totalCount'        => $query->count(),
         ]);
 
-        $entries = $query->orderBy("id desc")
+        $entries = $query->orderBy('id desc')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all()
         ;
 
         return $this->render(
-            "index",
+            'index',
             [
-                "entries"       => $entries,
-                "pagination"    => $pagination,
+                'entries'       => $entries,
+                'pagination'    => $pagination,
             ]
         );
     }
@@ -101,15 +101,27 @@ class GuestbookController extends Controller
         $guestbook = new GuestbookEntry();
 
         if ($guestbook->load(Yii::$app->request->post()) && $guestbook->validate()) {
-            $guestbook->created = (new \DateTime("now"))->format("Y-m-d H:i:s");
+            $guestbook->created = (new \DateTime('now'))->format('Y-m-d H:i:s');
             $guestbook->save(false);
             $headers = Yii::$app->response->headers;
-            $headers->set("Refresh", "5;url=" . Url::to(["guestbook/index"]));
+            $headers->set('Refresh', '5;url=' . Url::to(['guestbook/index']));
 
-            return $this->render("confirm", ["guestbook" => $guestbook]);
+            return $this->render(
+                'confirm',
+                [
+                    'title'     => 'Post successfully added!',
+                    'guestbook' => $guestbook,
+                ]
+            );
         } else {
 
-            return $this->render("form", ["guestbook" => $guestbook]); 
+            return $this->render(
+                'form',
+                [
+                    'title'     => 'Create a new post',
+                    'guestbook' => $guestbook,
+                ]
+            ); 
         }
     }
 }

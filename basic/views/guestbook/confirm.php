@@ -1,5 +1,8 @@
 <?php
     use yii\helpers\Html;
+
+    // Create page title
+    $this->title = isset($title) ? (string) $title : '';
 ?>
 <div class="row">
     <div class="col-md-12">

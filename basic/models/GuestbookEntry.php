@@ -24,10 +24,10 @@ class GuestbookEntry extends ActiveRecord
     public function rules()
     {
         return [
-            [["email", "name", "message", "verification"], "required"],
-            ["email", "email"],
-            ["verification", "captcha", 'captchaAction' => 'guestbook/captcha'],
-            ["created", "date"],
+            [['email', 'name', 'message', 'verification'], 'required'],
+            ['email', 'email'],
+            ['verification', 'captcha', 'captchaAction' => 'guestbook/captcha'],
+            ['created', 'date'],
         ];
     }
 }
