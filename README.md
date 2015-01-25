@@ -15,10 +15,10 @@ Run following code in your project directory:
 $ vagrant box add ubuntu/trusty64
 $ vagrant up
 $ vagrant ssh
-vagrant@vagrant-$ cd /vagrant/basic
-vagrant@vagrant-ubuntu-trusty-64:/vagrant/basic$ curl -sS https://getcomposer.org/installer | php
-vagrant@vagrant-ubuntu-trusty-64:/vagrant/basic$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
-vagrant@vagrant-ubuntu-trusty-64:/vagrant/basic$ php composer.phar install
+$ cd /vagrant/basic
+/vagrant/basic$ curl -sS https://getcomposer.org/installer | php
+/vagrant/basic$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
+/vagrant/basic$ php composer.phar install
 ```
 After all you need to create a new database. Login to mysql server using following command:
 ```sh
@@ -33,7 +33,7 @@ exit;
 
 Now you are ready to migrate data:
 ```sh
-vagrant@vagrant-ubuntu-trusty-64:/vagrant/basic$ php yii migrate
+/vagrant/basic$ php yii migrate
 ```
 
 When installation is complete, the site will be available at *http://127.0.0.1:8080*. This port can be easyli changed in Vagrantfile (in the root folder of the project).
