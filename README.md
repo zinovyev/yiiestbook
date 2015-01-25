@@ -19,7 +19,7 @@ Run following code in your project directory:
 ~/prj/yiiestbook$ vagrant ssh
 ```
 
-Now run the following code on the virtual machine:
+Now when the ssh session is started, run the following code on the virtual machine:
 
 ```sh
 $ cd /vagrant/basic
