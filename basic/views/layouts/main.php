@@ -23,7 +23,7 @@ AppAsset::register($this);
 <body>
 
 <?php $this->beginBody() ?>
-    <!-- <div class="wrap"> -->
+    <div class="wrap">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -35,7 +35,7 @@ AppAsset::register($this);
             </div>        
             <?= $content ?>
         </div>
-    <!-- </div> -->
+    </div>
 
     <footer class="footer">
         <div class="container">

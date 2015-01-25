@@ -9,7 +9,10 @@
             <?php foreach ($entries as $entry): ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?= $entry->name; ?> (<?= $entry->email; ?>) left a message:</h3>
+                        <p class="pull-right"><?= $entry->created; ?></p>
+                        <h3 class="panel-title">
+                            <?= $entry->name; ?> (<i><?= $entry->email; ?></i>) left a message:
+                        </h3>
                     </div>
                     <div class="panel-body">
                         <?= $entry->message; ?>

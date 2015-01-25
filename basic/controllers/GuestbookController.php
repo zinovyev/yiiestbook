@@ -72,7 +72,7 @@ class GuestbookController extends Controller
         $query = GuestbookEntry::find();
 
         $pagination = new Pagination([
-            "defaultPageSize"   => 3,
+            "defaultPageSize"   => 10,
             "totalCount"        => $query->count(),
         ]);
 
@@ -101,6 +101,7 @@ class GuestbookController extends Controller
         $guestbook = new GuestbookEntry();
 
         if ($guestbook->load(Yii::$app->request->post()) && $guestbook->validate()) {
+            $guestbook->created = (new \DateTime("now"))->format("Y-m-d H:i:s");
             $guestbook->save(false);
             $headers = Yii::$app->response->headers;
             $headers->set("Refresh", "5;url=" . Url::to(["guestbook/index"]));
