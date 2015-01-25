@@ -9,12 +9,17 @@ yiiestbook
 
 ## Installation
 
+If you haven`t *ubuntu/trusty64* box on your computer, install it with:
+
+```sh
+$ vagrant box add ubuntu/trusty64
+```
+
 Run following code in your project directory:
 
 ```sh
 ~/prj$ git clone https://github.com/zinovyev/yiiestbook.git
 ~/prj$ cd yiiestbook
-~/prj/yiiestbook$ vagrant box add ubuntu/trusty64
 ~/prj/yiiestbook$ vagrant up
 ~/prj/yiiestbook$ vagrant ssh
 ```
@@ -32,10 +37,10 @@ After all you need to create a new database. Login to mysql server using followi
 $ mysql -uroot -p1234
 ```
 
-And create a database:
+And create a database *yii2basic* used by the project:
 ```sql
-create database yii2basic;
-exit;
+mysql> create database yii2basic;
+mysql> exit;
 ```
 
 Now you are ready to migrate data:
