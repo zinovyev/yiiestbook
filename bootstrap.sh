@@ -46,7 +46,7 @@ else
     rm /etc/php5/fpm/php.ini
     cp /etc/php5/fpm/php.ini.bkp /etc/php5/fpm/php.ini
 fi
-sed -i.bak 's/^;cgi.fix_pathinfo.*$/cgi.fix_pathinfo = 0/g' /etc/php5/fpm/php.ini
+sed -i.bak -e 's/^;\?cgi.fix_pathinfo\b.*$/cgi.fix_pathinfo = 0/' /etc/php5/fpm/php.ini
 
 # Configure www.conf
 if [ ! -f /etc/php5/fpm/pool.d/www.conf.bkp ]; then
@@ -55,11 +55,11 @@ else
     rm /etc/php5/fpm/pool.d/www.conf
     cp /etc/php5/fpm/pool.d/www.conf.bkp /etc/php5/fpm/pool.d/www.conf
 fi
-sed -i.bak 's/^;security.limit_extensions.*$/security.limit_extensions = .php .php3 .php4 .php5/g' /etc/php5/fpm/pool.d/www.conf
-sed -i.bak 's/^;listen\s.*$/listen = \/var\/run\/php5-fpm.sock/g' /etc/php5/fpm/pool.d/www.conf
-sed -i.bak 's/^listen.owner.*$/listen.owner = www-data/g' /etc/php5/fpm/pool.d/www.conf
-sed -i.bak 's/^listen.group.*$/listen.group = www-data/g' /etc/php5/fpm/pool.d/www.conf
-sed -i.bak 's/^;listen.mode.*$/listen.mode = 0660/g' /etc/php5/fpm/pool.d/www.conf
+sed -i.bak -e 's/^;\?security.limit_extensions\b.*$/security.limit_extensions = .php .php3 .php4 .php5/' /etc/php5/fpm/pool.d/www.conf
+sed -i.bak -e 's/^;\?listen\b[\s]{1,}.*$/listen = \/var\/run\/php5-fpm.sock/' /etc/php5/fpm/pool.d/www.conf
+sed -i.bak -e 's/^;\?listen.owner\b.*$/listen.owner = www-data/' /etc/php5/fpm/pool.d/www.conf
+sed -i.bak -e 's/^;\?listen.group\b.*$/listen.group = www-data/' /etc/php5/fpm/pool.d/www.conf
+sed -i.bak -e 's/^;\?listen.mode\b.*$/listen.mode = 0660/' /etc/php5/fpm/pool.d/www.conf
 
 service php5-fpm restart
 
@@ -82,19 +82,16 @@ server
 {
     charset utf-8;
     client_max_body_size 128M;
+    
     listen  80;
 
     root /vagrant/basic/web;
     index index.php;
 
-    #access_log  /vagrant/basic/log/access.log main;
-    #error_log   /vagrant/basic/log/error.log;
-
-    location "/"
+    location /
     {
         # Redirect everything that isn't a real file to index.php
-        try_files $uri $uri/ /vagrant/basic/web/index.php?$args
-        index index.php;
+        try_files $uri $uri/ /index.php?$args;
     }
 
     location ~ \.php$
