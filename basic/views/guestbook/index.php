@@ -15,11 +15,11 @@
                     <div class="panel-heading">
                         <p class="pull-right"><?= $entry->created; ?></p>
                         <h3 class="panel-title">
-                            <?= $entry->name; ?> (<i><?= $entry->email; ?></i>) left a message:
+                            <?= Html::encode($entry->name); ?> (<i><?= Html::encode($entry->email); ?></i>) left a message:
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <?= $entry->message; ?>
+                        <?= Html::encode($entry->message); ?>
                     </div>
                 </div>
             <?php endforeach; ?>
